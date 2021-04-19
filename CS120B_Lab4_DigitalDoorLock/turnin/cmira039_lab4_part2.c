@@ -52,11 +52,20 @@ void tickCounter()
 		break;
 		
 		case INC:
+		if(isA0() && isA1())
+		{
+			COUNTER_TYPE = RESET;
+			break;
+		} 
 		COUNTER_TYPE = WAIT_INC;
 		break;
 		
 		case WAIT_INC:
-		if(isA0() && !isA1())
+		if(isA0() && isA1())
+		{
+			COUNTER_TYPE = RESET;
+		} 
+		else if(isA0() && !isA1())
 		{
 			COUNTER_TYPE = WAIT_INC;
 		}
@@ -66,11 +75,20 @@ void tickCounter()
 		break;
 		
 		case DEC:
+		if(isA0() && isA1())
+		{
+			COUNTER_TYPE = RESET;
+			break;
+		} 
 		COUNTER_TYPE = WAIT_DEC;
 		break;
 
 		case WAIT_DEC:
-		if(!isA0() && isA1())
+		if(isA0() && isA1())
+		{
+			COUNTER_TYPE = RESET;
+		} 
+		else if(!isA0() && isA1())
 		{
 			COUNTER_TYPE = WAIT_DEC;
 		}
